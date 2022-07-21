@@ -11,23 +11,25 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookhub.R
 
 
-class DashBoardFragment : Fragment(R.layout.fragment_dash_board) {
+class DashBoardFragment : Fragment() {
 
-    lateinit var binding: FragmentDashBoardBinding
+    lateinit var recyclerDashboard: RecyclerView
 
     lateinit var layoutManager: RecyclerView.LayoutManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment_dash_board, container, false)
 
+        recyclerDashboard = view.findViewById(R.id.recyclerDashboard)
+
         layoutManager = LinearLayoutManager(activity)
 
-        return binding.recyclerDashboard
+        return view
     }
 
 
