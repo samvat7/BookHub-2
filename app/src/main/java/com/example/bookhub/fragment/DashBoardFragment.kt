@@ -1,14 +1,20 @@
 package com.example.bookhub.fragment
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.provider.Settings
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +26,7 @@ import com.example.bookhub.R
 import com.example.bookhub.adapter.DashboardRecyclerAdapter
 import com.example.bookhub.model.Book
 import com.example.bookhub.util.ConnectionManager
+import org.json.JSONException
 import kotlin.collections.HashMap
 
 
@@ -31,7 +38,9 @@ class DashBoardFragment : Fragment() {
 
     lateinit var recyclerAdapter: DashboardRecyclerAdapter
 
-    private lateinit var checkConnection: Button
+    lateinit var progressLayout: RelativeLayout
+
+    lateinit var progressBar: ProgressBar
 
     var bookInfoList = arrayListOf<Book>()
 
@@ -59,107 +68,103 @@ class DashBoardFragment : Fragment() {
 
         layoutManager = LinearLayoutManager(activity)
 
-        checkConnection = view.findViewById(R.id.checkConnectionButton)
+        progressLayout = view.findViewById(R.id.progressLayout)
 
-        checkConnection.setOnClickListener{
+        progressBar = view.findViewById(R.id.progressBar)
 
-            if(ConnectionManager().checkConnectivity(activity as Context)){
-
-                val dialog = AlertDialog.Builder(activity as Context)
-
-                dialog.setTitle("Success")
-                dialog.setMessage("Internet Connection Found")
-                dialog.setPositiveButton("OK"){text, listener->
-                    //do nothing
-                }
-                dialog.setNegativeButton("CANCEL"){text, listener->
-                    //do nothing
-                }
-
-                dialog.create()
-                dialog.show()
-            }
-            else{
-
-                val dialog = AlertDialog.Builder(activity as Context)
-
-                dialog.setTitle("Error")
-                dialog.setMessage("Internet Connection Not Found")
-                dialog.setPositiveButton("OK"){text, listener->
-                    //do nothing
-                }
-                dialog.setNegativeButton("CANCEL"){text, listener->
-                    //do nothing
-                }
-
-                dialog.create()
-                dialog.show()
-            }
-        }
+        progressLayout.visibility = View.VISIBLE
 
         val queue = Volley.newRequestQueue(activity as Context)
 
         val url = "http://13.235.250.119/v1/book/fetch_books/"
 
-        val jsonObjectRequest = object: JsonObjectRequest(Request.Method.GET, url, null,
-            Response.Listener{
+        if(ConnectionManager().checkConnectivity(activity as Context)){
 
-                             val success = it.getBoolean("success")
+            val jsonObjectRequest = object: JsonObjectRequest(Request.Method.GET, url, null,
+                Response.Listener{
+                    try{
 
-                            if(success){
+                        progressLayout.visibility = View.GONE
 
-                                val data = it.getJSONArray("data")
+                        val success = it.getBoolean("success")
 
-                                for(i in 0 until data.length()){
+                        if(success){
 
-                                    val bookJsonObject = data.getJSONObject(i)
+                            val data = it.getJSONArray("data")
 
-                                    val bookObject = Book(
-                                        bookJsonObject.getString("book_id"),
-                                        bookJsonObject.getString("name"),
-                                        bookJsonObject.getString("author"),
-                                        bookJsonObject.getString("rating"),
-                                        bookJsonObject.getString("price"),
-                                        bookJsonObject.getString("image")
-                                    )
+                            for(i in 0 until data.length()){
 
-                                    bookInfoList.add(bookObject)
+                                val bookJsonObject = data.getJSONObject(i)
 
-                                    recyclerAdapter = DashboardRecyclerAdapter(activity as Context, bookInfoList)
+                                val bookObject = Book(
+                                    bookJsonObject.getString("book_id"),
+                                    bookJsonObject.getString("name"),
+                                    bookJsonObject.getString("author"),
+                                    bookJsonObject.getString("rating"),
+                                    bookJsonObject.getString("price"),
+                                    bookJsonObject.getString("image")
+                                )
 
-                                    recyclerDashboard.adapter = recyclerAdapter
+                                bookInfoList.add(bookObject)
 
-                                    recyclerDashboard.layoutManager = layoutManager
+                                recyclerAdapter = DashboardRecyclerAdapter(activity as Context, bookInfoList)
 
-                                    recyclerDashboard.addItemDecoration(
-                                        DividerItemDecoration(
-                                            recyclerDashboard.context,
-                                            (layoutManager as LinearLayoutManager).orientation
-                                        )
-                                    )
-                                }
+                                recyclerDashboard.adapter = recyclerAdapter
+
+                                recyclerDashboard.layoutManager = layoutManager
+
                             }
-                            else{
-                                Toast.makeText(activity as Context, "Some error has occurred...", Toast.LENGTH_SHORT).show()
-                            }
-            },
-            Response.ErrorListener {
-                             println("Error is $it")
-            }){
+                        }
+                        else{
+                            Toast.makeText(activity as Context, "Some error has occurred...", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    catch (e: JSONException){
 
-            override fun getHeaders(): MutableMap<String, String> {
+                        Toast.makeText(activity as Context, "Some Unexpected Error has occurred...", Toast.LENGTH_SHORT).show()
+                    }
+                },
+                Response.ErrorListener {
 
-                val headers = HashMap<String, String>()
+                    Toast.makeText(activity as Context, "Volley error has occurred...", Toast.LENGTH_SHORT).show()
+                }){
 
-                headers["Content Type"] = "application/json"
+                override fun getHeaders(): MutableMap<String, String> {
 
-                headers["token"] = "a33b5fbf98f5b2"
+                    val headers = HashMap<String, String>()
 
-                return headers
+                    headers["Content Type"] = "application/json"
+
+                    headers["token"] = "a33b5fbf98f5b2"
+
+                    return headers
+                }
             }
-        }
 
-        queue.add(jsonObjectRequest)
+            queue.add(jsonObjectRequest)
+        }
+        else{
+
+            val dialog = AlertDialog.Builder(activity as Context)
+
+            dialog.setTitle("Error")
+            dialog.setMessage("Internet Connection Not Found")
+            dialog.setPositiveButton("Open Settings"){text, listener->
+
+                val settingsIntent = Intent(Settings.ACTION_WIRELESS_SETTINGS)
+
+                startActivity(settingsIntent)
+
+                activity?.finish()
+            }
+            dialog.setNegativeButton("EXIT"){text, listener->
+
+                ActivityCompat.finishAffinity(activity as Activity)
+            }
+
+            dialog.create()
+            dialog.show()
+        }
 
         return view
     }
