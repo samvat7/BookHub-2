@@ -68,7 +68,7 @@
                         android:layout_height="wrap_content"
                         android:text="Name of the author"
                         android:layout_below="@+id/txtBookName"
-                        android:padding="8dp"
+                        android:padding="4dp"
                         android:textSize="15sp"
                         android:textColor="#000000"
                         />
@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:text="Rs. 999"
                         android:layout_below="@+id/txtBookAuthor"
-                        android:padding="8dp"
+                        android:padding="4dp"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:textColor="#357a38"
@@ -135,21 +135,22 @@
 
                     />
 
-
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnAddToFav"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/txtBookDesc"
+                    android:background="@color/colorPrimary"
+                    android:text="@string/add_to_favourites"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"
+                    android:textSize="19sp" />
             </RelativeLayout>
+
         </RelativeLayout>
     </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnAddToFav"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        android:text="@string/add_to_favourites"
-        android:textColor="#ffffff"
-        android:textStyle="bold"
-        android:textSize="19sp" />
+
 
     <RelativeLayout
         android:id="@+id/progressLayout"

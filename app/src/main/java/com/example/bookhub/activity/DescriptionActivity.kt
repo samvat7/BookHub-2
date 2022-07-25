@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
+import androidx.appcompat.widget.Toolbar
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -37,6 +38,8 @@ class DescriptionActivity : AppCompatActivity() {
 
     lateinit var imgBookImageDesc: ImageView
 
+    lateinit var toolbar: Toolbar
+
     var bookId: String? = "100"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +66,12 @@ class DescriptionActivity : AppCompatActivity() {
         txtBookDesc = findViewById(R.id.txtBookDesc)
 
         imgBookImageDesc = findViewById(R.id.imgBookImageDesc)
+
+        toolbar = findViewById(R.id.toolbar)
+
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.title = "Book Description"
 
         progressLayout.visibility = View.VISIBLE
 
