@@ -12,4 +12,5 @@
     <string name="favourites_fragment">Favourites Fragment</string>
     <string name="profile_fragment">Profile Fragment</string>
     <string name="about_app_fragment">About App Fragment</string>
+    <string name="add_to_favourites">Add to Favourites</string>
 </resources>

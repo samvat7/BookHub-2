@@ -27,7 +27,7 @@
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_scrollFlags="scroll|enterAlways"
-        />
+        ></androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
     <FrameLayout
         android:id="@+id/frame"
@@ -45,7 +45,7 @@
         app:headerLayout="@layout/drawer_header"
         app:menu="@menu/menu_drawer"
         android:layout_gravity="start"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="0dp"
 
         />
 </androidx.drawerlayout.widget.DrawerLayout>
