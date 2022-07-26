@@ -4,7 +4,6 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/adfmin/AndroidStudioProjects/BookHub-master/app/src/main/res/drawable/ic_recycler_image_background.xml" value="0.196" />
-        <entry key="..\:/Users/adfmin/AndroidStudioProjects/BookHub-master/app/src/main/res/layout/activity_description.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/adfmin/AndroidStudioProjects/BookHub-master/app/src/main/res/layout/fragment_dash_board.xml" value="0.18854166666666666" />
         <entry key="..\:/Users/adfmin/AndroidStudioProjects/BookHub-master/app/src/main/res/layout/recycler_dashboard_single_row.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/adfmin/Downloads/BookHub-master/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
@@ -14,8 +13,15 @@
         <entry key="..\:/Users/adfmin/Downloads/BookHub-master/app/src/main/res/layout/fragment_profile.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/adfmin/Downloads/BookHub-master/app/src/main/res/layout/recycler_dashboard_single_row.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/adfmin/Downloads/BookHub-master/app/src/main/res/menu/menu_drawer.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/layout/fragment_dash_board.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/layout/activity_description.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/layout/drawer_header.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/layout/fragment_dash_board.xml" value="0.25343999226562525" />
+        <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/layout/fragment_favourites.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/layout/recycler_dashboard_single_row.xml" value="0.17572463768115942" />
+        <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/layout/recyler_favourites_single_row.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/menu/menu_dashboard.xml" value="0.19199999414062519" />
+        <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/menu/menu_drawer.xml" value="0.1" />
         <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub-2/app/src/main/res/xml/network_security_config.xml" value="0.27007299270072993" />
         <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub/app/src/main/res/drawable-anydpi/ic_about_app.xml" value="0.22" />
         <entry key="..\:/Users/samva/AndroidStudioProjects/BookHub/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
